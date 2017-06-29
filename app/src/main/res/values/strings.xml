@@ -4,4 +4,6 @@
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="log">Log</string>
+    <string name="first_fragment">FirstFragment</string>
+    <string name="second_fragment">SecondFragment</string>
 </resources>
