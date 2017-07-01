@@ -30,7 +30,7 @@ class FirstFragment : Fragment() {
         val sharedViewModel = ViewModelProviders.of(activity).get(SharedViewModel::class.java)
 
         // Subscribing to the observer
-        sharedViewModel.time.observe(activity as LifecycleOwner, timeObserver)
+        sharedViewModel.formattedTime.observe(activity as LifecycleOwner, timeObserver)
     }
 
 }

@@ -11,45 +11,45 @@ class SharedViewModel : ViewModel() {
 
     private val LOG_TAG = "KotlinBlog.com"
 
-    private val formattedTime = MutableLiveData<String>()
-    private val timerState = TimerStateModel(false, null)
+    private val mFormattedTime = MutableLiveData<String>()
+    private val mTimerState = TimerStateModel(false, null)
 
-    private var timer: Timer? = null
+    private var mTimer: Timer? = null
 
-    // Getter for formattedTime LiveData, cast to immutable value
-    val time: LiveData<String> get() = formattedTime
+    // Getter for mFormattedTime LiveData, cast to immutable value
+    val formattedTime: LiveData<String> get() = mFormattedTime
 
     fun startTimer() {
-        if (timer != null) {
+        if (mTimer != null) {
             return
         }
 
         val initialTime = SystemClock.elapsedRealtime()
-        timer = Timer()
-        timer?.scheduleAtFixedRate(object : TimerTask() {
+        mTimer = Timer()
+        mTimer?.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 val secondsPassed = (SystemClock.elapsedRealtime() - initialTime) / 1000L
-                formattedTime.postValue(formatTime(secondsPassed))
+                mFormattedTime.postValue(formatTime(secondsPassed))
             }
         }, 1000L, 1000L)
 
-        timerState.isRunning = true
-        timerState.startedAt = Calendar.getInstance().time
+        mTimerState.isRunning = true
+        mTimerState.startedAt = Calendar.getInstance().time
     }
 
     fun stopTimer() {
-        if (timer != null) {
-            timer?.cancel()
-            timer = null
-            formattedTime.value = formatTime(0L)
-            timerState.startedAt = null
-            timerState.isRunning = false
+        if (mTimer != null) {
+            mTimer?.cancel()
+            mTimer = null
+            mFormattedTime.value = formatTime(0L)
+            mTimerState.startedAt = null
+            mTimerState.isRunning = false
         }
     }
 
     fun showLog() {
-        Log.d(LOG_TAG, "Is timer running now: ${timerState.isRunning}")
-        Log.d(LOG_TAG, "Timer started at: ${timerState.startedAt}")
+        Log.d(LOG_TAG, "Is mTimer running now: ${mTimerState.isRunning}")
+        Log.d(LOG_TAG, "Timer started at: ${mTimerState.startedAt}")
     }
 
     private fun formatTime(elapsedTime: Long): String {
