@@ -19,6 +19,7 @@ class SecondFragment : Fragment() {
 
         // Getting instance of the SharedViewModel
         val sharedViewModel = ViewModelProviders.of(activity).get(SharedViewModel::class.java)
+
         btnStart.setOnClickListener { sharedViewModel.startTimer() }
         btnStop.setOnClickListener { sharedViewModel.stopTimer() }
         btnToast.setOnClickListener { sharedViewModel.showLog() }

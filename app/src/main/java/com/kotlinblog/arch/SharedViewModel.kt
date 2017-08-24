@@ -11,10 +11,10 @@ class SharedViewModel : ViewModel() {
 
     private val LOG_TAG = "KotlinBlog.com"
 
+    private var mTimer: Timer? = null
+
     private val mFormattedTime = MutableLiveData<String>()
     private val mTimerState = TimerStateModel(false, null)
-
-    private var mTimer: Timer? = null
 
     // Getter for mFormattedTime LiveData, cast to immutable value
     val formattedTime: LiveData<String> get() = mFormattedTime
